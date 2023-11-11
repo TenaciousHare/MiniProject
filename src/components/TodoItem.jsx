@@ -1,11 +1,11 @@
 //@ts-nocheck
-export function TodoItem({ text, done, id }) {
+export function TodoItem({ text, done, id, onDoneTodo, onDeleteTodo }) {
   function handleDoneClick() {
-    console.log(id);
+    onDoneTodo(id);
   }
 
   function handleDeleteClick() {
-    console.log(id);
+    onDeleteTodo(id);
   }
 
   return (

@@ -13,6 +13,28 @@ const initialTODOs = [
 function App() {
   const [openForm, setOpenForm] = useState(false);
   const [todos, setTodos] = useState(initialTODOs);
+
+  function handleAddTodo(text, id) {
+    setTodos((prevState) => {
+      return [...prevState, { text, id, done: false }];
+    });
+  }
+
+  function handleDeleteTodo(id) {
+    const filteredTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(filteredTodos);
+  }
+
+  function handleDoneTodo(id) {
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, done: true };
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+  }
+
   return (
     <>
       <div className="inline-block max-w-3xl rounded-xl bg-white px-6 py-8">
@@ -24,14 +46,14 @@ function App() {
         {openForm && (
           <Form
             onOpenForm={() => setOpenForm((prevState) => !prevState)}
-            onAddTodo={(text, id) =>
-              setTodos((prevState) => {
-                return [...prevState, { text, id, done: false }];
-              })
-            }
+            onAddTodo={handleAddTodo}
           />
         )}
-        <TodoList todos={todos} />
+        <TodoList
+          onDeleteTodo={handleDeleteTodo}
+          onDoneTodo={handleDoneTodo}
+          todos={todos}
+        />
       </div>
     </>
   );
