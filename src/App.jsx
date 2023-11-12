@@ -35,6 +35,16 @@ function App() {
     setTodos(updatedTodos);
   }
 
+  function handleEditTodo(text, id) {
+    const editedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, text: text };
+      }
+      return todo;
+    });
+    setTodos(editedTodos);
+  }
+
   return (
     <>
       <div className="inline-block max-w-3xl rounded-xl bg-white px-6 py-8">
@@ -52,6 +62,7 @@ function App() {
         <TodoList
           onDeleteTodo={handleDeleteTodo}
           onDoneTodo={handleDoneTodo}
+          onEditTodo={handleEditTodo}
           todos={todos}
         />
       </div>

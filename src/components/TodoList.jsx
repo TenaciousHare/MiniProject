@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { TodoItem } from "./TodoItem";
-export function TodoList({ todos, onDeleteTodo, onDoneTodo }) {
+export function TodoList({ todos, onDeleteTodo, onDoneTodo, onEditTodo }) {
   return (
     <ul className="block">
       {todos.map(({ text, done, id }) => (
@@ -11,6 +11,7 @@ export function TodoList({ todos, onDeleteTodo, onDoneTodo }) {
           done={done}
           onDeleteTodo={onDeleteTodo}
           onDoneTodo={onDoneTodo}
+          onEditTodo={onEditTodo}
         />
       ))}
     </ul>
