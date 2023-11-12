@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { TodoItem } from "./TodoItem";
 export function TodoList({ todos, onDeleteTodo, onDoneTodo, onEditTodo }) {
   return (

@@ -1,4 +1,3 @@
-// @ts-nocheck
 export function Header({ numberOfTasks, openForm, isBtnVisible }) {
   return (
     <header className="flex items-center justify-between gap-24">

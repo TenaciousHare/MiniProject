@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useState } from "react";
 export function Form({ onAddTodo, closeForm }) {
   const [inputValue, setInputValue] = useState("");
@@ -25,7 +24,7 @@ export function Form({ onAddTodo, closeForm }) {
       />
       <button
         disabled={inputValue === ""}
-        className="cursor-pointer rounded border border-solid border-current px-2 py-1 text-sky-400 transition-all hover:bg-sky-400 hover:text-white disabled:bg-gray-400 disabled:text-white disabled:opacity-75"
+        className="cursor-pointer rounded border border-solid border-current px-2 py-1 text-sky-400 transition-all hover:bg-sky-400 hover:text-white disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-white disabled:opacity-75"
       >
         Dodaj
       </button>

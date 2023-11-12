@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useState } from "react";
 
 export function EditTodoForm({ onEditTodo, text, id, done, onEditClick }) {
