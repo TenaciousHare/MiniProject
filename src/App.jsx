@@ -25,10 +25,10 @@ function App() {
     setTodos(filteredTodos);
   }
 
-  function handleDoneTodo(id) {
+  function handleDoneTodo(id, done) {
     const updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
-        return { ...todo, done: true };
+        return { ...todo, done: !done };
       }
       return todo;
     });
@@ -50,12 +50,12 @@ function App() {
       <div className="inline-block max-w-3xl rounded-xl bg-white px-6 py-8">
         <Header
           isBtnVisible={!openForm}
-          onOpenForm={() => setOpenForm((prevState) => !prevState)}
+          openForm={() => setOpenForm(true)}
           numberOfTasks={todos.length}
         />
         {openForm && (
           <Form
-            onOpenForm={() => setOpenForm((prevState) => !prevState)}
+            closeForm={() => setOpenForm(false)}
             onAddTodo={handleAddTodo}
           />
         )}
