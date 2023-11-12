@@ -28,7 +28,7 @@ export function Form({ onAddTodo, onOpenForm }) {
       <button
         type="submit"
         disabled={inputValue === ""}
-        className="hover:text-grey-400 cursor-pointer rounded border border-solid border-current px-2 py-1 text-sky-400 transition-all hover:bg-sky-400 disabled:bg-gray-400 disabled:text-white disabled:opacity-75"
+        className="cursor-pointer rounded border border-solid border-current px-2 py-1 text-sky-400 transition-all hover:bg-sky-400 hover:text-white disabled:bg-gray-400 disabled:text-white disabled:opacity-75"
       >
         Dodaj
       </button>

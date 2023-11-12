@@ -6,7 +6,6 @@ export function Header({ numberOfTasks, onOpenForm, isBtnVisible }) {
         <h1 className="block text-3xl font-bold">Do zrobienia</h1>
         <h2 className="block text-2xl font-bold">{numberOfTasks} zadania</h2>
       </div>
-      {/*ADD TODO FORM TRIGGER BTN*/}
       {isBtnVisible && (
         <button
           onClick={onOpenForm}
