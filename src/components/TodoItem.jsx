@@ -12,7 +12,7 @@ export function TodoItem({
   const [isEdited, setIsEdited] = useState(false);
 
   function handleDoneClick() {
-    onDoneTodo(id, done);
+    onDoneTodo(id);
   }
 
   function handleDeleteClick() {

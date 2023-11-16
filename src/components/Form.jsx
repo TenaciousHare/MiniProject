@@ -1,15 +1,11 @@
 import { useState } from "react";
-export function Form({ onAddTodo, closeForm }) {
+export function Form({ onAddTodo }) {
   const [inputValue, setInputValue] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    const text = inputValue;
-    const id = crypto.randomUUID();
-
-    onAddTodo(text, id);
-    closeForm();
+    onAddTodo(inputValue);
   }
 
   return (

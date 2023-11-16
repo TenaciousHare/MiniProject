@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import { Header } from "./components/Header";
 import { Form } from "./components/Form";
 import { TodoList } from "./components/TodoList";
+import { appReducer } from "./reducer/appReducer";
 
 const initialTODOs = [
   { text: "Zapłacić rachunki", done: false, id: crypto.randomUUID() },
@@ -10,58 +11,26 @@ const initialTODOs = [
 ];
 
 function App() {
-  const [openForm, setOpenForm] = useState(false);
-  const [todos, setTodos] = useState(initialTODOs);
-
-  function handleAddTodo(text, id) {
-    setTodos((prevState) => {
-      return [...prevState, { text, id, done: false }];
-    });
-  }
-
-  function handleDeleteTodo(id) {
-    const filteredTodos = todos.filter((todo) => todo.id !== id);
-    setTodos(filteredTodos);
-  }
-
-  function handleDoneTodo(id, done) {
-    const updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return { ...todo, done: !done };
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
-  }
-
-  function handleEditTodo(text, id) {
-    const editedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return { ...todo, text: text };
-      }
-      return todo;
-    });
-    setTodos(editedTodos);
-  }
+  const [{ todos, isFormOpen }, dispatch] = useReducer(appReducer, {
+    todos: initialTODOs,
+    isFormOpen: false,
+  });
 
   return (
     <>
       <div className="inline-block max-w-3xl rounded-xl bg-white px-6 py-8">
         <Header
-          isBtnVisible={!openForm}
-          openForm={() => setOpenForm(true)}
+          isBtnVisible={!isFormOpen}
+          isFormOpen={() => dispatch({ type: "open_form" })}
           numberOfTasks={todos.length}
         />
-        {openForm && (
-          <Form
-            closeForm={() => setOpenForm(false)}
-            onAddTodo={handleAddTodo}
-          />
+        {isFormOpen && (
+          <Form onAddTodo={(text) => dispatch({ type: "add", text })} />
         )}
         <TodoList
-          onDeleteTodo={handleDeleteTodo}
-          onDoneTodo={handleDoneTodo}
-          onEditTodo={handleEditTodo}
+          onDeleteTodo={(id) => dispatch({ type: "delete", id })}
+          onDoneTodo={(id) => dispatch({ type: "done", id })}
+          onEditTodo={(text, id) => dispatch({ type: "edit", id, text })}
           todos={todos}
         />
       </div>

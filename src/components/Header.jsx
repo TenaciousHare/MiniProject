@@ -1,5 +1,5 @@
 import { getSubheading } from "../utils/getSubheading";
-export function Header({ numberOfTasks, openForm, isBtnVisible }) {
+export function Header({ numberOfTasks, isFormOpen, isBtnVisible }) {
   return (
     <header className="flex items-center justify-between gap-24">
       <div className="block">
@@ -10,7 +10,7 @@ export function Header({ numberOfTasks, openForm, isBtnVisible }) {
       </div>
       {isBtnVisible && (
         <button
-          onClick={openForm}
+          onClick={isFormOpen}
           className=" aspect-square w-12 cursor-pointer rounded-full border-0 bg-sky-400 text-2xl text-white"
         >
           +
