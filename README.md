@@ -2,7 +2,7 @@
 
 Mini ToDoList Project created with Vite+React+Tailwind for learning purposes
 
-##Features
+## Features
 
 1. Adding a new task - simply click the '+' button to add a new task to the list. The relevant form for adding a new task will open. Remember that you cannot add an empty task!
 2. Task counter - a simple counter that counts all the tasks in the list.
