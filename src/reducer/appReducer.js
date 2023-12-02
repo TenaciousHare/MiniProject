@@ -33,6 +33,12 @@ export function appReducer(state, action) {
           return todo;
         }),
       };
+
+    case "drag":
+      return {
+        ...state,
+        todos: [...action.todos],
+      };
     case "open_form":
       return { ...state, isFormOpen: true };
     default:

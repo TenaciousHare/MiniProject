@@ -2,6 +2,9 @@ import { useState } from "react";
 import { EditTodoForm } from "./EditTodoForm";
 
 export function TodoItem({
+  innerRef,
+  dragHandleProps,
+  draggableProps,
   text,
   done,
   id,
@@ -24,7 +27,12 @@ export function TodoItem({
   }
 
   return (
-    <li className="mt-4 flex min-w-[400px] list-none items-center gap-2 border-t border-solid border-black pt-4 ">
+    <li
+      ref={innerRef}
+      {...draggableProps}
+      {...dragHandleProps}
+      className="mt-4 flex min-w-[400px] list-none items-center gap-2 border-t border-solid border-black pt-4 "
+    >
       {!isEdited && (
         <span
           onClick={handleEditClick}

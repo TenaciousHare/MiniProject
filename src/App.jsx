@@ -3,6 +3,7 @@ import { Header } from "./components/Header";
 import { Form } from "./components/Form";
 import { TodoList } from "./components/TodoList";
 import { appReducer } from "./reducer/appReducer";
+import { DragDropContext } from "react-beautiful-dnd";
 
 const initialTODOs = [
   { text: "Zapłacić rachunki", done: false, id: crypto.randomUUID() },
@@ -16,6 +17,23 @@ function App() {
     isFormOpen: false,
   });
 
+  function handleDragEnd(result) {
+    const { source, destination } = result;
+
+    if (!destination) return;
+
+    if (
+      source.droppableId === destination.droppableId &&
+      source.index === destination.index
+    )
+      return;
+
+    const updatedTodos = [...todos];
+    const [reorderedItem] = updatedTodos.splice(source.index, 1);
+    updatedTodos.splice(destination.index, 0, reorderedItem);
+    dispatch({ type: "drag", todos: updatedTodos });
+  }
+
   return (
     <>
       <div className="inline-block max-w-3xl rounded-xl bg-white px-6 py-8">
@@ -27,12 +45,14 @@ function App() {
         {isFormOpen && (
           <Form onAddTodo={(text) => dispatch({ type: "add", text })} />
         )}
-        <TodoList
-          onDeleteTodo={(id) => dispatch({ type: "delete", id })}
-          onDoneTodo={(id) => dispatch({ type: "done", id })}
-          onEditTodo={(text, id) => dispatch({ type: "edit", id, text })}
-          todos={todos}
-        />
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <TodoList
+            onDeleteTodo={(id) => dispatch({ type: "delete", id })}
+            onDoneTodo={(id) => dispatch({ type: "done", id })}
+            onEditTodo={(text, id) => dispatch({ type: "edit", id, text })}
+            todos={todos}
+          />
+        </DragDropContext>
       </div>
     </>
   );
